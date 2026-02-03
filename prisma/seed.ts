@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
-    console.log('Seeding database with premium content...')
+    console.log('Seeding database with PERMANENT LOCAL content...')
 
     // Cleanup
     const deleteReviews = prisma.review.deleteMany()
@@ -29,56 +29,56 @@ async function main() {
         }
     })
 
-    // Verified High-Quality Unsplash Images
-    // Using simple formatting ?q=80&w=1200
+    // Using LOCAL images located in /public/images
+    // This removes all upstream dependencies and 404 errors.
 
     const businesses = [
         // RESTAURANTS
         {
             name: "Lumière Bistro",
-            description: "Experience the art of French cuisine in a setting that glows with warmth. Our tasting menu changes weekly, featuring locally sourced ingredients and paired with exquisite wines.",
+            description: "Experience the art of French cuisine in a setting that glows with warmth.",
             category: "Restaurants",
             rating: 4.9,
             reviewCount: 342,
-            image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1200",
+            image: "/images/restaurant.jpg",
             address: "124 Rue de Paris, Arts District"
         },
         {
             name: "Sakura Omakase",
-            description: "An intimate 12-seat sushi counter offering a traditional Edomae experience. Fish flown in daily from Toyosu Market.",
+            description: "An intimate 12-seat sushi counter offering a traditional Edomae experience.",
             category: "Restaurants",
             rating: 5.0,
             reviewCount: 128,
-            image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1200",
+            image: "/images/restaurant.jpg", // Reuse for consistency
             address: "88 Blossom Way, Cherry Hill"
         },
         {
             name: "The Iron Fork",
-            description: "Industrial-chic gastropub serving bold flavors and craft beers. Famous for our truffle fries and wagyu burgers.",
+            description: "Industrial-chic gastropub serving bold flavors and craft beers.",
             category: "Restaurants",
             rating: 4.6,
             reviewCount: 567,
-            image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1200",
+            image: "/images/restaurant.jpg",
             address: "42 Factory Lane, Industrial Park"
         },
         {
             name: "Verde Organic Kitchen",
-            description: "Plant-based dining reimagined. Vibrant, healthy, and absolutely delicious bowls and smoothies.",
+            description: "Plant-based dining reimagined. Vibrant, healthy, and absolutely delicious.",
             category: "Restaurants",
             rating: 4.7,
             reviewCount: 210,
-            image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200",
+            image: "/images/restaurant.jpg",
             address: "15 Green St, Eco Village"
         },
 
         // SHOPPING
         {
             name: "Noir Boutique",
-            description: "Avant-garde fashion and curated minimalist pieces. Discover the future of style.",
+            description: "Avant-garde fashion and curated minimalist pieces.",
             category: "Shopping",
             rating: 4.5,
             reviewCount: 89,
-            image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200",
+            image: "/images/shopping.jpg",
             address: "505 Fifth Ave, Fashion District"
         },
         {
@@ -87,99 +87,99 @@ async function main() {
             category: "Shopping",
             rating: 4.9,
             reviewCount: 156,
-            image: "https://images.unsplash.com/photo-1532452119098-a3650b3c46d3?q=80&w=1200",
+            image: "/images/shopping.jpg",
             address: "33 RPM Road, Retro Quarter"
         },
         {
             name: "Botanic Haven",
-            description: "Transform your home into a jungle. Rare house plants, handmade pots, and expert advice.",
+            description: "Transform your home into a jungle. Rare house plants and pots.",
             category: "Shopping",
             rating: 4.8,
             reviewCount: 230,
-            image: "https://images.unsplash.com/photo-1463936575829-25148e1db1b8?q=80&w=1200",
+            image: "/images/shopping.jpg",
             address: "77 Fern St, Greenhouse District"
         },
         {
             name: "CyberGadget",
-            description: "The latest in tech, drones, and smart home automation. Try before you buy.",
+            description: "The latest in tech, drones, and smart home automation.",
             category: "Shopping",
             rating: 4.4,
             reviewCount: 412,
-            image: "https://images.unsplash.com/photo-1468495244123-6c6ef332df75?q=80&w=1200",
+            image: "/images/shopping.jpg",
             address: "101 Silicon Way, Tech Hub"
         },
 
         // SERVICES
         {
             name: "Elite Grooming Co.",
-            description: "Precision haircuts and hot towel shaves. A modern barbershop with old-school service.",
+            description: "Precision haircuts and hot towel shaves.",
             category: "Services",
             rating: 4.7,
             reviewCount: 320,
-            image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1200", // NEW: Barbershop
+            image: "/images/services.jpg",
             address: "22 Gentle St, Uptown"
         },
         {
             name: "Paws & Play",
-            description: "Luxury pet hotel and daycare. Because your furry friends deserve a vacation too.",
+            description: "Luxury pet hotel and daycare.",
             category: "Services",
             rating: 4.9,
             reviewCount: 180,
-            image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1200",
+            image: "/images/services.jpg",
             address: "99 Barker Lane,Suburbia"
         },
         {
             name: "Zenith Yoga Studio",
-            description: "Find your balance. Hot yoga, vinyasa flow, and meditation classes for all levels.",
+            description: "Find your balance. Hot yoga and meditation classes.",
             category: "Services",
             rating: 4.8,
             reviewCount: 275,
-            image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1200", // NEW: Yoga
+            image: "/images/services.jpg",
             address: "44 Lotus Blvd, Wellness Park"
         },
 
         // WELLNESS
         {
             name: "Aura Spa & Wellness",
-            description: "Rejuvenate your body and mind with our hydrotherapy pools and deep tissue massages.",
+            description: "Rejuvenate your body and mind with our hydrotherapy pools.",
             category: "Wellness",
             rating: 4.6,
             reviewCount: 145,
-            image: "https://images.unsplash.com/photo-1600334089648-b0d9d302427f?q=80&w=1200", // NEW: Spa
+            image: "/images/wellness.jpg",
             address: "10 Serenity Dr, Highlands"
         },
         {
             name: "Ironclad Gym",
-            description: "State-of-the-art equipment, personal training, and 24/7 access. Build your best self.",
+            description: "State-of-the-art equipment and personal training.",
             category: "Wellness",
             rating: 4.5,
             reviewCount: 500,
-            image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200",
+            image: "/images/wellness.jpg",
             address: "500 Strong Ave, Downtown"
         },
 
         // NIGHTLIFE
         {
             name: "The Midnight Lounge",
-            description: "Craft cocktails and jazz in a speakeasy atmosphere. Dress code enforced.",
+            description: "Craft cocktails and jazz in a speakeasy atmosphere.",
             category: "Nightlife",
             rating: 4.8,
             reviewCount: 210,
-            image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1200",
+            image: "/images/nightlife.jpg",
             address: "Hidden Alley, Old Town"
         },
         {
             name: "Neon Pulse",
-            description: "Electronic music, rooftop views, and electric energy. The city's premier nightclub.",
+            description: "Electronic music, rooftop views, and electric energy.",
             category: "Nightlife",
             rating: 4.3,
             reviewCount: 680,
-            image: "https://images.unsplash.com/photo-1570140224673-c8209867566a?q=80&w=1200", // NEW: Nightclub (Neon) - old one 566737236500 often fails
+            image: "/images/nightlife.jpg",
             address: "100 Skyline Dr, Downtown"
         }
     ]
 
-    console.log(`Adding ${businesses.length} businesses...`)
+    console.log(`Adding ${businesses.length} businesses with LOCAL images...`)
 
     for (const b of businesses) {
         await prisma.business.create({
