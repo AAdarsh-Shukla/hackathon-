@@ -1,0 +1,42 @@
+Project Requirements
+
+This project is built with Node.js and Next.js.
+To install all requirements, run:
+
+    npm install
+
+Below is the detailed list of required packages managed by npm.
+
+Runtime Dependencies:
+- @prisma/client: ^6.19.2
+- @radix-ui/react-label: ^2.1.8
+- @radix-ui/react-slot: ^1.2.4
+- class-variance-authority: ^0.7.1
+- clsx: ^2.1.1
+- framer-motion: ^12.30.1
+- lucide-react: ^0.563.0
+- next: 16.1.6
+- react: 19.2.3
+- react-dom: 19.2.3
+- tailwind-merge: ^3.4.0
+- tailwindcss-animate: ^1.0.7
+
+Development Dependencies:
+- @tailwindcss/postcss: ^4
+- @types/node: ^20
+- @types/react: ^19
+- @types/react-dom: ^19
+- babel-plugin-react-compiler: 1.0.0
+- eslint: ^9
+- eslint-config-next: 16.1.6
+- prisma: ^6.19.2
+- tailwindcss: ^4
+- tsx: ^4.21.0
+- typescript: ^5
+
+System Requirements:
+- Node.js (v18 or later recommended)
+- npm (Node Package Manager)
+
+Database:
+- SQLite (file-based, no separate installation required)
