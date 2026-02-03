@@ -5,32 +5,40 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: 240 10% 4%;
-  /* Darker, richer background */
+  /* Deep, Rich Dark Theme Base */
+  --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
-  --card: 240 10% 7%;
+  
+  --card: 240 10% 5%;
   --card-foreground: 0 0% 98%;
+  
   --popover: 240 10% 3.9%;
   --popover-foreground: 0 0% 98%;
-  --primary: 252 100% 64%;
-  /* Vivid Violet/Indigo */
-  --primary-foreground: 0 0% 100%;
-  --secondary: 240 4% 16%;
+  
+  /* Primary: Electric Indigo/Violet */
+  --primary: 263.4 70% 50.4%;
+  --primary-foreground: 210 40% 98%;
+  
+  --secondary: 240 3.7% 15.9%;
   --secondary-foreground: 0 0% 98%;
-  --muted: 240 4% 16%;
-  --muted-foreground: 240 5% 65%;
-  --accent: 262 80% 50%;
-  /* Deep Purple Accent */
+  
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  
+  /* Accent: Vibrant Pink/Purple */
+  --accent: 290 80% 55%;
   --accent-foreground: 0 0% 98%;
+  
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --border: 240 4% 16%;
-  --input: 240 4% 16%;
-  --ring: 252 100% 64%;
+  
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 263.4 70% 50.4%;
+  
   --radius: 0.75rem;
 }
 
-/* Optional Light Mode overrides if needed in future, keeping defaults for now but optimizing for dark aesthetic */
 .dark {
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
@@ -38,19 +46,19 @@
   --card-foreground: 0 0% 98%;
   --popover: 240 10% 3.9%;
   --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
+  --primary: 263.4 70% 50.4%;
+  --primary-foreground: 210 40% 98%;
   --secondary: 240 3.7% 15.9%;
   --secondary-foreground: 0 0% 98%;
   --muted: 240 3.7% 15.9%;
   --muted-foreground: 240 5% 64.9%;
-  --accent: 240 3.7% 15.9%;
+  --accent: 290 80% 55%;
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
   --border: 240 3.7% 15.9%;
   --input: 240 3.7% 15.9%;
-  --ring: 240 4.9% 83.9%;
+  --ring: 263.4 70% 50.4%;
 }
 
 @theme inline {
@@ -73,52 +81,58 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
 
-  /* Animations */
+  /* Custom Animations */
   --animate-aurora: aurora 20s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-slide-up-fade: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 
   @keyframes aurora {
     0% {
       background-position: 50% 50%, 50% 50%;
     }
-
     100% {
       background-position: 350% 50%, 350% 50%;
     }
   }
 
   @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
 
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-
-    50% {
-      transform: translateY(-10px);
-    }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; box-shadow: 0 0 20px 0px rgba(var(--primary), 0.5); }
+    50% { opacity: 0.8; box-shadow: 0 0 30px 5px rgba(var(--primary), 0.3); }
+  }
+  
+  @keyframes slide-up-fade {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 }
 
 body {
-  @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
+  @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-white;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+  background-attachment: fixed;
 }
 
-/* Enhanced Glassmorphism Utilities */
+/* Premium Utilities */
 .glass {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
+  @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl;
 }
 
 .glass-card {
-  @apply bg-card/40 backdrop-blur-md border border-white/5 transition-all duration-300 shadow-lg;
-}
-
-.glass-card:hover {
-  @apply border-primary/30 bg-card/60;
+  @apply bg-card/40 backdrop-blur-md border border-white/5 transition-all duration-300 shadow-lg hover:shadow-primary/10 hover:border-primary/20;
 }
 
 .text-gradient {
@@ -126,5 +140,9 @@ body {
 }
 
 .text-gradient-primary {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 animate-pulse-glow;
 }
+
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }

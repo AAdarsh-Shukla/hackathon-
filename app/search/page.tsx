@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { StarRating } from "@/components/ui/star-rating";
-import { MapPin } from "lucide-react";
+import { BusinessCard } from "@/components/business-card";
 import Link from "next/link";
-import Image from "next/image";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -56,44 +53,19 @@ export default async function SearchPage({
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredBusinesses.length === 0 && (
-                    <p className="text-muted-foreground col-span-3">No businesses found.</p>
+                    <div className="col-span-3 text-center py-20">
+                        <p className="text-xl text-muted-foreground">No businesses found matching your criteria.</p>
+                        <Link href="/search">
+                            <Button variant="link" className="mt-4 text-primary">Clear Filters</Button>
+                        </Link>
+                    </div>
                 )}
                 {filteredBusinesses.map((item) => (
-                    <Link href={`/business/${item.id}`} key={item.id} className="group">
-                        <Card className="glass-card hover:shadow-lg transition-all duration-300 border-border/50 overflow-hidden h-full flex flex-col">
-                            <div className="aspect-video relative overflow-hidden bg-muted">
-                                {item.image && (
-                                    <Image
-                                        src={item.image}
-                                        alt={item.name}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                )}
-                                <div className="absolute top-2 right-2">
-                                    <Badge variant="glass">{item.category}</Badge>
-                                </div>
-                            </div>
-                            <CardHeader>
-                                <CardTitle className="text-lg">{item.name}</CardTitle>
-                                <CardDescription className="flex items-center text-xs">
-                                    <MapPin className="mr-1 h-3 w-3" />
-                                    {item.address}
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="mt-auto">
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center space-x-2">
-                                        <StarRating rating={item.rating} size={16} />
-                                        <span className="text-sm font-medium">{item.rating.toFixed(1)}</span>
-                                    </div>
-                                    <span className="text-xs text-muted-foreground">{item.reviewCount} reviews</span>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </Link>
+                    <div key={item.id} className="h-[400px]">
+                        <BusinessCard business={item} />
+                    </div>
                 ))}
             </div>
         </div>

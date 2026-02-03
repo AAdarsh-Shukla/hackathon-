@@ -12,7 +12,7 @@ export async function submitReview(formData: FormData) {
 
     // Hardcoded user for demo
     // In real app, get session userId
-    const demoUserId = (await prisma.user.findFirst({ where: { email: "demo@example.com" } }))?.id
+    const demoUserId = (await prisma.user.findFirst({ where: { email: "alex@example.com" } }))?.id
 
     if (!demoUserId) throw new Error("User not found")
 
