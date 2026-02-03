@@ -52,10 +52,11 @@ export function MainNav() {
                     <Link href="/admin/dashboard">
                         <Button variant="ghost" size="sm" className="hidden md:flex hover:bg-white/10 hover:text-primary">Admin</Button>
                     </Link>
-                    <Link href="/search">
-                        <Button size="sm" className="bg-white/10 hover:bg-white/20 text-white border border-white/10 backdrop-blur-sm rounded-full px-6 transition-all hover:scale-105">
-                            Get Started
-                        </Button>
+                    <Link
+                        href="/search"
+                        className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium h-9 bg-white/10 hover:bg-white/20 text-white border border-white/10 backdrop-blur-sm rounded-full px-6 transition-all hover:scale-105"
+                    >
+                        Get Started
                     </Link>
                 </div>
             </div>
