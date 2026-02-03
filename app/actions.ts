@@ -101,3 +101,30 @@ export async function registerBusiness(formData: FormData) {
     revalidatePath("/search")
     return { success: true, businessId: business.id }
 }
+
+export async function getAdminStats() {
+    const [businessCount, userCount, reviewStats] = await Promise.all([
+        prisma.business.count(),
+        prisma.user.count(),
+        prisma.review.groupBy({
+            by: ['status'],
+            _count: {
+                status: true
+            }
+        })
+    ])
+
+    const totalReviews = reviewStats.reduce((acc, curr) => acc + curr._count.status, 0)
+    const pendingReviews = reviewStats.find(s => s.status === 'PENDING')?._count.status || 0
+    const approvedReviews = reviewStats.find(s => s.status === 'APPROVED')?._count.status || 0
+    const rejectedReviews = reviewStats.find(s => s.status === 'REJECTED')?._count.status || 0
+
+    return {
+        businessCount,
+        userCount,
+        totalReviews,
+        pendingReviews,
+        approvedReviews,
+        rejectedReviews
+    }
+}
